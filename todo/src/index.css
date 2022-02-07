@@ -69,3 +69,13 @@ li {
   max-width: 500px;
   margin: 20px auto;
 }
+.ul li input {
+  display: none;
+}
+.input-edit {
+  display: inline !important;
+  color: blue;
+}
+.filtered {
+  display: none !important;
+}
