@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=EB+Garamond:ital@0;1&family=Luxurious+Script&family=Poppins:ital,wght@0,700;1,400&display=swap");
+body {
+  background: #2c3333;
+  margin: 0;
+  font-family: "EB Garamond", serif;
+}
+.home h1 {
+  text-align: center;
+  color: #fff;
+  font-size: 75px;
+  font-family: "Dancing Script", cursive;
+}
+.ul ul {
+  max-width: 500px;
+  margin: 15px 250px;
+}
+li {
+  width: 100%;
+  float: left;
+  list-style: none;
+  color: #fff;
+  background: rgb(94, 94, 94);
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 8px;
+}
+.ul i {
+  color: #fff;
+  float: right;
+
+  padding: 5px;
+  font-size: 15px;
+}
+.ul div {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+.ul div input {
+  margin: 10px;
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  outline-color: darksalmon;
+  background: rgb(243, 243, 243);
+  border-radius: 8px;
+}
+.ul form button {
+  padding: 15px;
+  border: 0;
+  color: #fff;
+  outline-color: darksalmon;
+  background: rgb(255, 109, 109);
+  border-radius: 8px;
+  margin: 5px;
+}
+.ul form .add {
+  margin: 10px auto;
+  width: 75%;
+  padding: 15px;
+  border: 0;
+  text-align: center;
+  outline-color: darksalmon;
+  background: rgb(243, 243, 243);
+  border-radius: 8px;
+  flex-direction: row;
+}
+.ul form {
+  max-width: 500px;
+  margin: 20px auto;
+}
