@@ -7,8 +7,9 @@ body {
 .home h1 {
   text-align: center;
   color: #fff;
-  font-size: 75px;
+  font-size: 50px;
   font-family: "Dancing Script", cursive;
+  text-transform: uppercase;
 }
 .ul ul {
   max-width: 500px;

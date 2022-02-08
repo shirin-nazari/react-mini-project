@@ -1,78 +1,130 @@
 import { useEffect, useState } from "react";
 import db from "../data/db.json";
+
+const useInputValue = (getValue) => {
+  const [value, setValue] = useState(getValue);
+
+  return {
+    value,
+    onChange: (e) => setValue(e.target.value),
+  };
+};
 const List = () => {
-  //   const valueinputTarget = "";
-  const [search, setSearch] = useState("");
+  const searchValue = useInputValue("");
+  const valueinputTarget = useInputValue("");
+  const valueAdd = useInputValue("");
   const [nameclass, setNameClass] = useState("");
-  const [valueInput, setValue] = useState("");
+  const [newClass, setClass] = useState("");
+  const [todo, setTodo] = useState([]);
+  // empty value input add
+  let complate;
   const handleSearch = (e) => {
-    setSearch(e.target.value);
-    db.filter((item) => item.text.toLowerCase().includes(search)).forEach(
-      (todo) => (todo.classList = "filtered")
-    );
+    const filtered = db.find((n) => n.text.toLowerCase().includes(e));
+    if (filtered.text) {
+      setClass("filtered");
+      console.log("no im not working");
+    }
+    console.log(filtered, e);
   };
   const handleDelete = (e) => {
     e.target.parentElement.remove();
   };
   const handleEdit = (e) => {
     //get vlaue li
-    const valueEdit = e.target.parentElement.innerText;
-    setValue(valueEdit);
+    let valueEdit = e.target.parentElement.innerText;
+    console.log(valueEdit);
+    valueEdit = valueinputTarget;
+    // db.find(ele=>{
+    //   valueEdit=
+
+    //   }
+    // })
+    // setValue(valueEdit);
     // console.log(valueinputTarget);
     // add class for display
     // e.target.children[0].classList.add("input-edit");
+
     if (e.target.children[0]) {
       setNameClass("input-edit");
     }
     // console.log(e.target.children[0]);
   };
-
+  /* ------------------------ function push kardan data ----------------------- */
   const handleSubmit = (e) => {
     e.preventDefault();
-    const push = JSON.stringify({
-      text: e.target[0].value,
-    });
-    console.log(push);
+    const push = {
+      text: valueAdd.value,
+    };
+
+    setTodo(push.text);
     db.push(push);
+
+    return db;
   };
   useEffect(() => {
-    localStorage.setItem("todo", `${db}`);
-  });
+    const todoStore = JSON.stringify(localStorage.getItem("todoStorage"));
+    if (todoStore) db.includes(todoStore);
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("todoStorage", JSON.stringify(todo));
+  }, [todo]);
+  /* -------------------------------------------------------------------------- */
 
   return (
     <div className="ul">
       <div>
         <input
+          // {...searchValue}
           type="search"
-          value={search}
+          // value={search}
           placeholder="Search in list"
-          onChange={(e) => handleSearch(e)}
+          onChange={(e) => {
+            // const filtered = db.filter((n) => {
+            //   n.text.toLowerCase().includes(e.target.value);
+            //   // .className("filtered");
+            // });
+            // console.log(filtered);
+            handleSearch(e.target.value);
+          }}
         />
       </div>
+
       <ul>
-        {db.map((item) => (
-          <li key={item.text}>
-            {item.text}
-            <i className="fas fa-pen" onClick={(e) => handleEdit(e)}>
-              <input
-                className={nameclass}
-                type="text"
-                value={valueInput}
-                // onChange={(e) => (valueinputTarget = e.target.value)}
-              />
-            </i>
+        {db.map((item, index) => (
+          <li key={index} className="">
+            <label htmlFor={index}>
+              <i
+                className="fas fa-pen"
+                onClick={(e) => handleEdit(e)}
+                id={index}
+              >
+                <input
+                  className={nameclass}
+                  type="text"
+                  {...valueinputTarget}
+                  // onChange={(e) => {
+                  //   console.log(e);
+                  // }}
+                />
+              </i>
+              <span> {item.text}</span>
+            </label>
             <i
               className="fas fa-trash-alt"
               onClick={(e) => handleDelete(e)}
             ></i>
           </li>
         ))}
-        {/* {searchResult.map((item) => {
-          <li>{item}</li>;
-        })} */}
       </ul>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input type="text" placeholder="Add to do list" className="add" />
+        <input
+          type="text"
+          value={todo}
+          placeholder="Add to do list"
+          className="add"
+          required
+          {...valueAdd}
+        />
         <button>Add </button>
       </form>
     </div>
