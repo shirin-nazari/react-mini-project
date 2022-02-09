@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import db from "../data/db.json";
 
 const useInputValue = (getValue) => {
@@ -10,21 +11,26 @@ const useInputValue = (getValue) => {
   };
 };
 const List = () => {
-  const searchValue = useInputValue("");
   const valueinputTarget = useInputValue("");
   const valueAdd = useInputValue("");
   const [nameclass, setNameClass] = useState("");
-  const [newClass, setClass] = useState("");
+  const [card, setCard] = useState("");
+  let getClass = "";
+  // const [newClass, setClass] = useState("");
   const [todo, setTodo] = useState([]);
-  // empty value input add
-  let complate;
+
   const handleSearch = (e) => {
     const filtered = db.find((n) => n.text.toLowerCase().includes(e));
-    if (filtered.text) {
-      setClass("filtered");
-      console.log("no im not working");
-    }
+
+    // if (filtered) {
+    //   setClass("filtered");
+    //   console.log(" im  working");
+    // }
+    // filtered.className = "filtered";
+    setCard(filtered);
+    getClass = "filtered";
     console.log(filtered, e);
+    // return filtered;
   };
   const handleDelete = (e) => {
     e.target.parentElement.remove();
@@ -85,13 +91,15 @@ const List = () => {
             // });
             // console.log(filtered);
             handleSearch(e.target.value);
+            e.target.classList.add("filtered");
           }}
         />
       </div>
 
       <ul>
         {db.map((item, index) => (
-          <li key={index} className="">
+          <li key={index} className={getClass}>
+            {/* // className={newClass}>{card} */}
             <label htmlFor={index}>
               <i
                 className="fas fa-pen"
