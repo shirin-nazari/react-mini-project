@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import db from "../data/db.json";
 
+/* ----------------------------- get vlaue input ---------------------------- */
 const useInputValue = (getValue) => {
   const [value, setValue] = useState(getValue);
 
@@ -10,15 +11,19 @@ const useInputValue = (getValue) => {
     onChange: (e) => setValue(e.target.value),
   };
 };
+/* -------------------------------------------------------------------------- */
 const List = () => {
+  /* ----------------------- get value input az function ---------------------- */
   const valueinputTarget = useInputValue("");
   const valueAdd = useInputValue("");
+  /* -------------------------------------------------------------------------- */
   const [nameclass, setNameClass] = useState("");
   const [card, setCard] = useState("");
   let getClass = "";
-  // const [newClass, setClass] = useState("");
-  const [todo, setTodo] = useState([]);
 
+  const [todo, setTodo] = useState([]);
+  /* ------------------------------- search box ------------------------------- */
+  //to console javab kamel migiram
   const handleSearch = (e) => {
     const filtered = db.find((n) => n.text.toLowerCase().includes(e));
 
@@ -32,9 +37,14 @@ const List = () => {
     console.log(filtered, e);
     // return filtered;
   };
+  /* -------------------------------------------------------------------------- */
+  /* --------------------------------- delete --------------------------------- */
   const handleDelete = (e) => {
     e.target.parentElement.remove();
   };
+  /* -------------------------------------------------------------------------- */
+  /* ---------------------------------- edit ---------------------------------- */
+  // car nmikone ta nesfeh dors shode va to console car mikone
   const handleEdit = (e) => {
     //get vlaue li
     let valueEdit = e.target.parentElement.innerText;
@@ -55,6 +65,7 @@ const List = () => {
     }
     // console.log(e.target.children[0]);
   };
+  /* -------------------------------------------------------------------------- */
   /* ------------------------ function push kardan data ----------------------- */
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,6 +89,7 @@ const List = () => {
 
   return (
     <div className="ul">
+      {/* /* ------------------------------- search box -------------------------------  */}
       <div>
         <input
           // {...searchValue}
@@ -85,18 +97,15 @@ const List = () => {
           // value={search}
           placeholder="Search in list"
           onChange={(e) => {
-            // const filtered = db.filter((n) => {
-            //   n.text.toLowerCase().includes(e.target.value);
-            //   // .className("filtered");
-            // });
-            // console.log(filtered);
             handleSearch(e.target.value);
             e.target.classList.add("filtered");
           }}
         />
       </div>
+      {/* -------------------------------------------------------------------------- */}
 
       <ul>
+        {/* --------------------------------- make li -------------------------------- */}
         {db.map((item, index) => (
           <li key={index} className={getClass}>
             {/* // className={newClass}>{card} */}
@@ -124,6 +133,7 @@ const List = () => {
           </li>
         ))}
       </ul>
+      {/* -------------------------------- form add --------------------------------  */}
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
           type="text"
