@@ -98,7 +98,6 @@ const List = () => {
           placeholder="Search in list"
           onChange={(e) => {
             handleSearch(e.target.value);
-            e.target.classList.add("filtered");
           }}
         />
       </div>
