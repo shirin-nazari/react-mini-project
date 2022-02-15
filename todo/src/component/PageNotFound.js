@@ -1,3 +1,5 @@
+// * I DON'T SAY THIS IS YOU MADE IS WRONG!.your component is correct but
+// * is better use array function for your component.
 const NotFound = () => {
   return (
     <div className="not-found">
